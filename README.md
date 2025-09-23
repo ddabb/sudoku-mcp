@@ -1,0 +1,120 @@
+# 数独 MCP 服务器
+
+这是一个基于 C# 开发的数独 MCP 服务器，提供完整的数独游戏功能集，包括生成不同难度的数独谜题、自动求解数独、验证数独有效性、可视化展示和提供解题提示等。该服务器可作为 NuGet 包发布，无缝集成到 Copilot 和其他 AI 助手中，增强其处理数独相关任务的能力。
+
+参考 [aka.ms/nuget/mcp/guide](https://aka.ms/nuget/mcp/guide) 获取完整指南。
+
+请注意，此项目基于 MCP 服务器模板开发，MCP 目前处于预览阶段。如有反馈，请参与[简短调查](http://aka.ms/dotnet-mcp-template-survey)。
+
+## 发布到 NuGet.org 前的检查清单
+
+- 按照下面的步骤在本地测试 MCP 服务器。
+- 更新 .csproj 文件中的包元数据，特别是 `<PackageId>`。
+- 更新 `.mcp/server.json` 以声明 MCP 服务器的输入。
+  - 参见 [配置输入](https://aka.ms/nuget/mcp/guide/configuring-inputs) 获取更多详情。
+- 使用 `dotnet pack` 打包项目。
+
+`bin/Release` 目录将包含包文件 (.nupkg)，可以[发布到 NuGet.org](https://learn.microsoft.com/nuget/nuget-org/publish-a-package)。
+
+## 本地开发
+
+要从源代码（本地）测试此 MCP 服务器，而不使用已构建的 MCP 服务器包，可以配置 IDE 使用 `dotnet run` 直接运行项目。
+
+```json
+{
+  "servers": {
+    "SudokuMcp": {
+      "type": "stdio",
+      "command": "dotnet",
+      "args": ["run", "--project", "<项目目录路径>"]
+    }
+  }
+}
+```
+
+## 测试 MCP 服务器
+
+配置完成后，您可以向 Copilot Chat 请求数独相关功能，例如：
+
+- "生成一个中等难度的数独谜题"
+- "帮我解决这个数独谜题：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+- "验证这个数独是否符合规则：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+- "将这个数独转换为可视化表格：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+- "为这个数独提供 3 个解题提示：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+- "评估这个数独的难度级别：530070000600195000098000060800060003400803001700020006060000280000419005000080079"
+
+Copilot 会提示您使用`SudokuMcp` MCP 服务器上的相关工具，并向您展示结果。所有数独输入均使用 81 位字符串表示，0 表示空格，从左到右、从上到下排列。
+
+## 发布到 NuGet.org
+
+1. 运行 `dotnet pack -c Release` 创建 NuGet 包
+2. 使用 `dotnet nuget push bin/Release/*.nupkg --api-key <your-api-key> --source https://api.nuget.org/v3/index.json` 发布到 NuGet.org
+
+## 从 NuGet.org 使用 MCP 服务器
+
+一旦 MCP 服务器包发布到 NuGet.org，您可以在首选 IDE 中配置它。VS Code 和 Visual Studio 都使用 `dnx` 命令从 NuGet.org 下载并安装 MCP 服务器包。
+
+- **VS Code**：创建 `<工作区目录>/.vscode/mcp.json` 文件
+- **Visual Studio**：创建 `<解决方案目录>\.mcp.json` 文件
+
+对于 VS Code 和 Visual Studio，配置文件使用以下服务器定义：
+
+```json
+{
+  "servers": {
+    "SudokuMcp": {
+      "type": "stdio",
+      "command": "dnx",
+      "args": ["SudokuMcp", "--version", "1.0.0", "--yes"]
+    }
+  }
+}
+```
+
+## 数独 MCP 服务器功能
+
+本服务器提供以下强大的数独相关功能：
+
+1. **生成数独谜题**：根据指定难度（简单、中等、标准、困难、专家）生成有效的数独谜题，难度通过空格数量精确控制
+2. **求解数独**：使用回溯算法高效解决任何有效的数独谜题，返回完整解答
+3. **验证数独**：全面检查数独谜题是否符合规则（行、列、九宫格内无重复数字）
+4. **数独可视化**：将数字字符串转换为美观的表格形式，使数独谜题更易读易理解
+5. **获取提示**：为解题过程中的玩家提供指定数量的智能提示，显示应填入的确切位置和数字
+6. **难度评估**：分析数独谜题的复杂度，基于空格数量评估为简单、中等、困难或专家级别
+
+## 更多信息
+
+.NET MCP 服务器使用 [ModelContextProtocol](https://www.nuget.org/packages/ModelContextProtocol) C# SDK。有关 MCP 的更多信息：
+
+- [官方文档](https://modelcontextprotocol.io/)
+- [协议规范](https://spec.modelcontextprotocol.io/)
+- [GitHub 组织](https://github.com/modelcontextprotocol)
+
+参考 VS Code 或 Visual Studio 文档，了解有关配置和使用 MCP 服务器的更多信息：
+
+- [在 VS Code 中使用 MCP 服务器（预览）](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
+- [在 Visual Studio 中使用 MCP 服务器（预览）](https://learn.microsoft.com/visualstudio/ide/mcp-servers)
+
+## 数独输入格式说明
+
+所有数独相关功能都使用统一的输入格式：
+
+- 数独谜题表示为 81 个字符的字符串
+- 使用数字 1-9 表示已填入的数字
+- 使用 0 表示空格（待填入的位置）
+- 字符按从左到右、从上到下的顺序排列（即先第一行从左到右，然后第二行从左到右，依此类推）
+- 例如：`530070000600195000098000060800060003400803001700020006060000280000419005000080079`表示一个标准的 9x9 数独谜题
+
+## 常见问题解答
+
+**问：如何指定生成数独的难度级别？**  
+答：使用`GenerateSudoku`方法时，可以指定难度参数（1-5），分别对应简单、中等、标准、困难和专家级别。
+
+**问：如何判断我的数独谜题是否有解？**  
+答：使用`SolveSudoku`方法尝试求解，如果返回错误信息，则表示该数独无解或不是有效的数独。
+
+**问：如何获取数独解题提示？**  
+答：使用`GetSudokuHint`方法，可以指定需要的提示数量，系统会随机选择空格位置并提供正确答案。
+
+**问：如何评估数独的难度？**  
+答：使用`EvaluateSudokuDifficulty`方法，系统会基于空格数量分析难度级别。

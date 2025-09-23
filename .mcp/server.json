@@ -1,0 +1,21 @@
+{
+  "$schema": "https://modelcontextprotocol.io/schemas/draft/2025-07-09/server.json",
+  "description": "一个用于数独游戏的MCP服务器，提供数独生成、求解等功能",
+  "name": "io.github.ddabb/sudoku-mcp",
+  "packages": [
+    {
+      "registry_name": "nuget",
+      "name": "SudokuMcp",
+      "version": "1.0.0",
+      "package_arguments": [],
+      "environment_variables": []
+    }
+  ],
+  "repository": {
+    "url": "https://github.com/ddabb/sudoku-mcp",
+    "source": "github"
+  },
+  "version_detail": {
+    "version": "1.0.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "inputs": [],
+  "servers": {
+    "SudokuMcp": {
+      "type": "stdio",
+      "command": "dnx",
+      "args": ["SudokuMcp@", "--yes"],
+      "env": {}
+    }
+  }
+}
