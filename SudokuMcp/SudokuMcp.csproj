@@ -11,7 +11,7 @@
     <!-- Set recommended package metadata -->
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>SudokuMcp</PackageId>
-    <PackageVersion>1.0.3</PackageVersion>
+    <PackageVersion>1.0.4</PackageVersion>
     <PackageTags>AI; MCP; server; stdio; Sudoku</PackageTags>
     <Description>一个用于数独游戏的MCP服务器，基于MCP C# SDK开发。</Description>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
