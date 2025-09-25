@@ -1,5 +1,6 @@
+using Xunit;
 using System;
-using System.Text;
+using System.IO;
 
 namespace SudokuMcp.Test
 {
@@ -13,7 +14,7 @@ namespace SudokuMcp.Test
         /// <summary>
         /// 运行所有测试
         /// </summary>
-        public void RunAllTests()
+        private void RunAllTests()
         {
             Console.WriteLine("开始运行数独工具测试...");
 
@@ -26,7 +27,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("所有测试完成！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试生成数独功能
         /// </summary>
@@ -53,7 +54,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("生成数独测试通过！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试求解数独功能
         /// </summary>
@@ -69,7 +70,8 @@ namespace SudokuMcp.Test
             {
                 throw new Exception("求解数独失败");
             }
-
+            Assert.NotNull(solution);
+            Assert.Equal(81, solution?.Length);
             // 验证解决方案是否有效
             bool isValid = sudokuTools.ValidateSudoku(solution);
             if (!isValid)
@@ -87,7 +89,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("求解数独测试通过！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试验证数独功能
         /// </summary>
@@ -132,7 +134,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("验证数独测试通过！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试数独可视化功能
         /// </summary>
@@ -150,7 +152,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("数独可视化测试通过！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试获取数独提示功能
         /// </summary>
@@ -178,7 +180,7 @@ namespace SudokuMcp.Test
 
             Console.WriteLine("获取数独提示测试通过！");
         }
-
+        [Fact]
         /// <summary>
         /// 测试评估数独难度功能
         /// </summary>

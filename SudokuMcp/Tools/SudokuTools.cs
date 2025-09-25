@@ -83,7 +83,7 @@ public class SudokuTools
     [McpServerTool]
     [Description("验证数独谜题是否符合规则（行、列、九宫格内无重复数字）")]
     public bool ValidateSudoku(
-        [Description("数独谜题，使用0表示空格，格式为81个数字的字符串，从左到右、从上到下排列")] string puzzle)
+        [Description("数独谜题，使用0表示空格，格式为81个数字的字符串，从左到右、从上到下排列")] string? puzzle)
     {
         // 验证输入
         if (string.IsNullOrEmpty(puzzle) || puzzle.Length != 81)

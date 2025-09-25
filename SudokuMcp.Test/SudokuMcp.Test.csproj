@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Library</OutputType>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+		<IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+    <ItemGroup>
+      <PackageReference Include="xunit" Version="2.6.6" />
+      <PackageReference Include="xunit.runner.visualstudio" Version="2.5.7" />
+      <PackageReference Include="coverlet.collector" Version="6.0.0" />
+      <PackageReference Include="Microsoft.Extensions.AI.Abstractions" Version="9.6.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\SudokuMcp\SudokuMcp.csproj" />
+    </ItemGroup>
+</Project>

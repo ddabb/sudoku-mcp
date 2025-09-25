@@ -11,17 +11,21 @@
     <!-- Set recommended package metadata -->
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageId>SudokuMcp</PackageId>
-    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersion>1.0.3</PackageVersion>
     <PackageTags>AI; MCP; server; stdio; Sudoku</PackageTags>
     <Description>一个用于数独游戏的MCP服务器，基于MCP C# SDK开发。</Description>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include=".mcp\config.json" Pack="true" PackagePath=".mcp\" />
+    <Content Include=".mcp\server.json" Pack="true" PackagePath=".mcp\" />
+  </ItemGroup>
   <!-- Include additional files for browsing the MCP server. -->
   <ItemGroup>
-    <None Include=".mcp\server.json" Pack="true" PackagePath="/.mcp/" />
     <None Include="README.md" Pack="true" PackagePath="/" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="10.0.0-preview.6.25358.103" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.9" />
     <PackageReference Include="ModelContextProtocol" Version="0.3.0-preview.2" />
   </ItemGroup>
 </Project>
