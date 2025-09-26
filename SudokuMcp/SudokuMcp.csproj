@@ -17,8 +17,8 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Content Include=".mcp\config.json" Pack="true" PackagePath=".mcp\" />
-    <Content Include=".mcp\server.json" Pack="true" PackagePath=".mcp\" />
+    <None Include=".mcp\config.json" Pack="true" PackagePath=".mcp\" />
+    <None Include=".mcp\server.json" Pack="true" PackagePath=".mcp\" />
   </ItemGroup>
   <!-- Include additional files for browsing the MCP server. -->
   <ItemGroup>
